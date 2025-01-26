@@ -1,4 +1,4 @@
-package org.example;
+package ru.zeusina.theatre_game;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;

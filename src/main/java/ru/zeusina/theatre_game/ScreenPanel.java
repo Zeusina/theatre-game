@@ -1,4 +1,4 @@
-package org.example;
+package ru.zeusina.theatre_game;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package org.example;
+package ru.zeusina.theatre_game;
 
 public class Const {
     static final int CHARACTER_WIDTH = 100;
