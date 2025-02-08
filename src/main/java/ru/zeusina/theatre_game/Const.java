@@ -8,7 +8,8 @@ public class Const {
 
     static final int WINDOW_WIDTH = 600, WINDOW_HEIGHT = 600;
 
-    static final int JUMP_STRENGTH = 60;
+    static final int JUMP_STRENGTH = 10;
+    public static final int JUMP_DURATION = 10;
 
     static final int PLATFORM_WIDTH = 60, PLATFORM_HEIGHT = 10;
 }

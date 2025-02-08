@@ -7,9 +7,10 @@ public class Hero {
 
     private Rectangle rec = new Rectangle(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
 
-    private int speedX, speedY = Const.SPEED;
+    private int speedX, speedY = 0;
 
-    private boolean isInAir = true;
+    private boolean isInAir = false;
+    private int jumpTicks = 0;
 
     public void moveRight() {
         speedX = Const.SPEED;
@@ -31,6 +32,15 @@ public class Hero {
         x += speedX;
         y += speedY;
         rec.setBounds(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
+
+        if (isInAir) {
+            if (jumpTicks > 0) {
+                speedY = -Const.JUMP_STRENGTH;
+                jumpTicks--;
+            } else {
+                speedY = Const.SPEED;
+            }
+        }
         collision();
     }
 
@@ -44,16 +54,33 @@ public class Hero {
 
     public void jump() {
         if (!isInAir) {
-            y -= Const.JUMP_STRENGTH;
+            jumpTicks = Const.JUMP_DURATION;
+            speedY = -Const.JUMP_STRENGTH;
             isInAir = true;
         }
-
     }
 
     private void collision() {
+        boolean onPlatform = false;
         if (rec.intersects(Main.floor)) {
-            y = Main.floor.y - Const.CHARACTER_HEIGHT;
+            y = Main.floor.y - Const.CHARACTER_HEIGHT+1;
             isInAir = false;
+            speedY = 0;
+            onPlatform = true;
+        }
+
+        for (Platform platform : Main.platforms) {
+            if (rec.intersects(platform)) {
+                y = platform.y - Const.CHARACTER_HEIGHT+1;
+                isInAir = false;
+                speedY = 0;
+                onPlatform = true;
+                break;
+            }
+        }
+
+        if (!onPlatform) {
+            isInAir = true;
         }
     }
 }
