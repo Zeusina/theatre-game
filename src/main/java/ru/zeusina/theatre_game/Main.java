@@ -1,14 +1,21 @@
 package ru.zeusina.theatre_game;
 
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Main {
     static Hero character = new Hero();
     static Floor floor = new Floor();
+    static ArrayList<Platform> platforms = new ArrayList<>();
 
     public static void main(String[] args) {
+        platforms.add(new Platform(floor.x + 100, floor.y - 50, Const.PLATFORM_WIDTH, Const.PLATFORM_HEIGHT));
+        platforms.add(new Platform(floor.x + 300, floor.y - 100, Const.PLATFORM_WIDTH, Const.PLATFORM_HEIGHT));
+        platforms.add(new Platform(floor.x + 500, floor.y - 150, Const.PLATFORM_WIDTH, Const.PLATFORM_HEIGHT));
+        platforms.add(new Platform(floor.x + 200, floor.y - 200, Const.PLATFORM_WIDTH, Const.PLATFORM_HEIGHT));
+        platforms.add(new Platform(floor.x + 400, floor.y - 250, Const.PLATFORM_WIDTH, Const.PLATFORM_HEIGHT));
+
 
         ScreenPanel screenPanel = new ScreenPanel();
 

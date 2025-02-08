@@ -20,7 +20,9 @@ public class ScreenPanel extends JPanel implements Runnable {
         g.drawRect(Main.floor.x, Main.floor.y, Main.floor.width, Main.floor.height);
         g.drawRect(Main.character.getRec().x, Main.character.getRec().y, Main.character.getRec().width, Main.character.getRec().height);
 
-        g.drawRect(Main.floor.x + 250, Main.floor.y - 40, Const.PLATFORM_WIDTH, Const.PLATFORM_HEIGHT);
+        for (Platform block : Main.platforms) {
+            g.drawRect(block.x, block.y, block.width, block.height);
+        }
     }
 
     @Override
