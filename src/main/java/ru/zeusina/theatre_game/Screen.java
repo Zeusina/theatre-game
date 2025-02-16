@@ -6,7 +6,9 @@ public class Screen extends JFrame {
 
     public Screen() {
         setSize(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
-        setLocation(300, 100);
+        setLocation(0, 0);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
 
 
         setVisible(true);

@@ -5,7 +5,13 @@ import java.awt.*;
 public class Hero {
     private int x = 100, y = 100;
 
-    private Rectangle rec = new Rectangle(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
+    private Rectangle downCollider = new Rectangle(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
+    private Rectangle upCollider = new Rectangle(x, y, Const.CHARACTER_WIDTH, 10);
+
+    private Rectangle leftCollider = new Rectangle(x, y, 5, Const.CHARACTER_HEIGHT);
+    private Rectangle rightCollider = new Rectangle(x + Const.CHARACTER_WIDTH - 5, y, 5, Const.CHARACTER_HEIGHT);
+
+
 
     private int speedX, speedY = 0;
 
@@ -24,14 +30,30 @@ public class Hero {
         return y;
     }
 
-    public Rectangle getRec() {
-        return rec;
+    public Rectangle getDownCollider() {
+        return downCollider;
+    }
+
+    public Rectangle getUpCollider() {
+        return upCollider;
+    }
+
+    public Rectangle getLeftCollider() {
+        return leftCollider;
+    }
+
+    public Rectangle getRightCollider() {
+        return rightCollider;
     }
 
     public void update() {
         x += speedX;
         y += speedY;
-        rec.setBounds(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
+        downCollider.setBounds(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
+        upCollider.setBounds(x, y, Const.CHARACTER_WIDTH, 10);
+        leftCollider.setBounds(x, y, 5, Const.CHARACTER_HEIGHT);
+        rightCollider.setBounds(x + Const.CHARACTER_WIDTH - 5, y, 5, Const.CHARACTER_HEIGHT);
+
 
         if (isInAir) {
             if (jumpTicks > 0) {
@@ -62,7 +84,7 @@ public class Hero {
 
     private void collision() {
         boolean onPlatform = false;
-        if (rec.intersects(Main.floor)) {
+        if (downCollider.intersects(Main.floor)) {
             y = Main.floor.y - Const.CHARACTER_HEIGHT+1;
             isInAir = false;
             speedY = 0;
@@ -70,11 +92,27 @@ public class Hero {
         }
 
         for (Platform platform : Main.platforms) {
-            if (rec.intersects(platform)) {
+            if (downCollider.intersects(platform)) {
                 y = platform.y - Const.CHARACTER_HEIGHT+1;
                 isInAir = false;
                 speedY = 0;
                 onPlatform = true;
+                break;
+            }
+            if (upCollider.intersects(platform)) {
+                y = platform.y + Const.PLATFORM_HEIGHT + 5;
+                speedY = 0;
+                jumpTicks = 0;
+                break;
+            }
+            if (leftCollider.intersects(platform)) {
+                speedX = 0;
+                x = platform.x + Const.PLATFORM_WIDTH + 1;
+                break;
+            }
+            if (rightCollider.intersects(platform)) {
+                speedX = 0;
+                x = platform.x - Const.CHARACTER_WIDTH;
                 break;
             }
         }
