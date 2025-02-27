@@ -17,7 +17,7 @@ public class ScreenPanel extends JPanel implements Runnable {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(Main.background, 0, 0, null);
-        g.drawImage(Main.hero, Main.character.getX(), Main.character.getY(), null);
+        g.drawImage(Main.hero, Main.character.getX(), Main.character.getY()-135, null);
 
         g.drawRect(Main.character.getX(), Main.character.getY(), Const.CHARACTER_WIDTH, Const.CHARACTER_HEIGHT);
         g.drawRect(Main.floor.x, Main.floor.y, Main.floor.width, Main.floor.height);

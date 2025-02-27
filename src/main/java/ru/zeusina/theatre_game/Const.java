@@ -2,7 +2,7 @@ package ru.zeusina.theatre_game;
 
 public class Const {
     static final int CHARACTER_WIDTH = 180;
-    static final int CHARACTER_HEIGHT = 295;
+    static final int CHARACTER_HEIGHT = 160;
 
     static final int SPEED = 5;
 

@@ -12,7 +12,6 @@ public class Hero {
     private Rectangle rightCollider = new Rectangle(x + Const.CHARACTER_WIDTH - 5, y, 5, Const.CHARACTER_HEIGHT);
 
 
-
     private int speedX, speedY = 0;
 
     private boolean isInAir = false;
@@ -85,7 +84,7 @@ public class Hero {
     private void collision() {
         boolean onPlatform = false;
         if (downCollider.intersects(Main.floor)) {
-            y = Main.floor.y - Const.CHARACTER_HEIGHT+1;
+            y = Main.floor.y - Const.CHARACTER_HEIGHT + 1;
             isInAir = false;
             speedY = 0;
             onPlatform = true;
@@ -93,7 +92,7 @@ public class Hero {
 
         for (Platform platform : Main.platforms) {
             if (downCollider.intersects(platform)) {
-                y = platform.y - Const.CHARACTER_HEIGHT+1;
+                y = platform.y - Const.CHARACTER_HEIGHT + 1;
                 isInAir = false;
                 speedY = 0;
                 onPlatform = true;
