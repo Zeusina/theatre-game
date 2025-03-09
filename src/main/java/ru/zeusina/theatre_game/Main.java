@@ -11,35 +11,65 @@ import java.util.ArrayList;
 public class Main {
     static Hero character = new Hero();
     static Floor floor = new Floor();
-    static ArrayList<Platform> platforms = new ArrayList<>();
-    static Image background;
-    static Image hero;
+    static ArrayList<Level> levels;
+    static Level currentLevel;
 
     static {
+        levels = new ArrayList<>();
         try {
-            background = ImageIO.read(new File("image/levels/1.jpg"));
-            hero = ImageIO.read(new File("image/hero.png"));
+            Image hero = ImageIO.read(new File("image/hero.png"));
+            ArrayList<Platform> level1Platforms = new ArrayList<>();
+            level1Platforms.add(new Platform(0, 613, 190, 22));
+            level1Platforms.add(new Platform(196, 718, 224, 38));
+            level1Platforms.add(new Platform(531, 960, 183, 26));
+            level1Platforms.add(new Platform(731, 593, 219, 25));
+            level1Platforms.add(new Platform(1042, 925, 153, 20));
+            level1Platforms.add(new Platform(1274, 774, 258, 28));
+            level1Platforms.add(new Platform(1551, 964, 256, 28));
+            level1Platforms.add(new Platform(1810, 767, 111, 27));
+            level1Platforms.add(new Platform(1244, 413, 224, 27));
+            levels.add(new Level(ImageIO.read(new File("image/levels/1.jpg")), hero, level1Platforms,
+                    new Rectangle(1875, 575, 45, 183), 5, 378));
+
+            ArrayList<Platform> level2Platforms = new ArrayList<>();
+
+            level2Platforms.add(new Platform(0, 1056, 191, 23));
+            level2Platforms.add(new Platform(204, 991, 195, 26));
+            level2Platforms.add(new Platform(417, 939, 193, 23));
+            level2Platforms.add(new Platform(625, 832, 194, 24));
+            level2Platforms.add(new Platform(841, 649, 192, 22));
+            level2Platforms.add(new Platform(1059, 648, 191, 24));
+            level2Platforms.add(new Platform(1277, 399, 193, 23));
+            level2Platforms.add(new Platform(1498, 344, 192, 22));
+            level2Platforms.add(new Platform(1730, 343, 190, 24));
+
+            levels.add(new Level(ImageIO.read(new File("image/levels/2.jpg")), hero, level2Platforms,
+                    new Rectangle(1855, 157, 65, 185), 8, 876));
+
+            ArrayList<Platform> level3Platforms = new ArrayList<>();
+
+            level3Platforms.add(new Platform(0, 342, 193, 24));
+            level3Platforms.add(new Platform(192, 651, 192, 24));
+            level3Platforms.add(new Platform(414, 819, 192, 26));
+            level3Platforms.add(new Platform(639, 653, 193, 24));
+            level3Platforms.add(new Platform(856, 819, 192, 25));
+            level3Platforms.add(new Platform(1061, 652, 193, 24));
+            level3Platforms.add(new Platform(1264, 545, 193, 22));
+            level3Platforms.add(new Platform(1506, 398, 190, 22));
+            level3Platforms.add(new Platform(1730, 295, 191, 22));
+
+
+            levels.add(new Level(ImageIO.read(new File("image/levels/3.jpg")), hero, level3Platforms,
+                    new Rectangle(1857, 137, 64, 154), 11, 198));
+
+
+            currentLevel = levels.getFirst();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void main(String[] args) {
-        platforms.add(new Platform(floor.x, floor.y - 445 - 22, 190, 22));
-        platforms.add(new Platform(floor.x + 196, floor.y - 38 - 318, 224, 38));
-        platforms.add(new Platform(floor.x + 531, floor.y - 92 - 28, 183, 26));
-        platforms.add(new Platform(floor.x + 731, floor.y - 462 - 25, 219, 25));
-        platforms.add(new Platform(floor.x + 1042, floor.y - 135 - 20, 153, 20));
-        platforms.add(new Platform(floor.x + 1274, floor.y - 278 - 28, 258, 28));
-        platforms.add(new Platform(floor.x + 1551, floor.y - 88 - 28, 256, 28));
-        platforms.add(new Platform(floor.x + 1810, floor.y - 286 - 27, 111, 27));
-        platforms.add(new Platform(floor.x + 1244, floor.y - 640 - 27, 224, 27));
-
-
-
-
-
-
 
 
         ScreenPanel screenPanel = new ScreenPanel();

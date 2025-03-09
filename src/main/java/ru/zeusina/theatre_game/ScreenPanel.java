@@ -16,8 +16,8 @@ public class ScreenPanel extends JPanel implements Runnable {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(Main.background, 0, 0, null);
-        g.drawImage(Main.hero, Main.character.getX(), Main.character.getY()-135, null);
+        g.drawImage(Main.currentLevel.getBackground(), 0, 0, null);
+        g.drawImage(Main.currentLevel.getHero(), Main.character.getX(), Main.character.getY() - 135, null);
 
         g.drawRect(Main.character.getX(), Main.character.getY(), Const.CHARACTER_WIDTH, Const.CHARACTER_HEIGHT);
         g.drawRect(Main.floor.x, Main.floor.y, Main.floor.width, Main.floor.height);
@@ -31,9 +31,13 @@ public class ScreenPanel extends JPanel implements Runnable {
         g.drawRect(Main.character.getRightCollider().x, Main.character.getRightCollider().y, Main.character.getRightCollider().width, Main.character.getRightCollider().height);
         g.setColor(Color.BLACK);
 
-//        for (Platform block : Main.platforms) {
-//            g.drawRect(block.x, block.y, block.width, block.height);
-//        }
+        for (Platform block : Main.currentLevel.getPlatforms()) {
+            g.drawRect(block.x, block.y, block.width, block.height);
+        }
+
+        g.setColor(Color.ORANGE);
+        g.drawRect(Main.currentLevel.getCheckpoint().x, Main.currentLevel.getCheckpoint().y, Main.currentLevel.getCheckpoint().width, Main.currentLevel.getCheckpoint().height);
+        g.setColor(Color.BLACK);
     }
 
     @Override

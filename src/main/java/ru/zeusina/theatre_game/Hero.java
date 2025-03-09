@@ -3,7 +3,7 @@ package ru.zeusina.theatre_game;
 import java.awt.*;
 
 public class Hero {
-    private int x = 100, y = 100;
+    private int x = 5, y = 378;
 
     private Rectangle downCollider = new Rectangle(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
     private Rectangle upCollider = new Rectangle(x, y, Const.CHARACTER_WIDTH, 10);
@@ -63,6 +63,7 @@ public class Hero {
             }
         }
         collision();
+        checkTrigger();
     }
 
     public void stop() {
@@ -90,7 +91,7 @@ public class Hero {
             onPlatform = true;
         }
 
-        for (Platform platform : Main.platforms) {
+        for (Platform platform : Main.currentLevel.getPlatforms()) {
             if (downCollider.intersects(platform)) {
                 y = platform.y - Const.CHARACTER_HEIGHT + 1;
                 isInAir = false;
@@ -119,5 +120,21 @@ public class Hero {
         if (!onPlatform) {
             isInAir = true;
         }
+    }
+
+    private void checkTrigger() {
+        Rectangle trigger = Main.currentLevel.getCheckpoint();
+
+        if (downCollider.intersects(trigger) || upCollider.intersects(trigger)
+                || leftCollider.intersects(trigger) || rightCollider.intersects(trigger)) {
+            if (Main.levels.size() > 1) {
+                Main.levels.remove(0);
+                Main.currentLevel = Main.levels.getFirst();
+                x = Main.currentLevel.getStartX();
+                y = Main.currentLevel.getStartY();
+            }
+
+        }
+
     }
 }
