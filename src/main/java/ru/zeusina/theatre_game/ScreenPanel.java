@@ -17,7 +17,7 @@ public class ScreenPanel extends JPanel implements Runnable {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(Main.currentLevel.getBackground(), 0, 0, null);
-        g.drawImage(Main.currentLevel.getHero(), Main.character.getX(), Main.character.getY() - 135, null);
+        g.drawImage(Main.currentLevel.getHero(), Main.character.getX(), Main.character.getY(), null);
 
         g.drawRect(Main.character.getX(), Main.character.getY(), Const.CHARACTER_WIDTH, Const.CHARACTER_HEIGHT);
         g.drawRect(Main.floor.x, Main.floor.y, Main.floor.width, Main.floor.height);
@@ -35,9 +35,20 @@ public class ScreenPanel extends JPanel implements Runnable {
             g.drawRect(block.x, block.y, block.width, block.height);
         }
 
+        for (Collectable collectable : Main.currentLevel.getCollectables()) {
+            if (collectable.isVisible()) {
+                g.drawRect(collectable.getTrigger().x, collectable.getTrigger().y, collectable.getTrigger().width, collectable.getTrigger().height);
+                g.drawImage(collectable.getIcon(), collectable.getX(), collectable.getY(), null);
+            }
+        }
+
         g.setColor(Color.ORANGE);
         g.drawRect(Main.currentLevel.getCheckpoint().x, Main.currentLevel.getCheckpoint().y, Main.currentLevel.getCheckpoint().width, Main.currentLevel.getCheckpoint().height);
         g.setColor(Color.BLACK);
+
+        if(Main.fullscreen != null) {
+            g.drawImage(Main.fullscreen, 0, 0, null);
+        }
     }
 
     @Override
@@ -47,6 +58,14 @@ public class ScreenPanel extends JPanel implements Runnable {
                 update();
 
                 repaint();
+                if (Main.fullscreen != null) {
+                    try {
+                        Thread.sleep(30 * 1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Main.fullscreen = null;
+                }
 
                 Thread.sleep(40);
             } catch (InterruptedException e) {

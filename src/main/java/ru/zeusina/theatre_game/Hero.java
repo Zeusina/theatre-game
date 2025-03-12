@@ -1,6 +1,9 @@
 package ru.zeusina.theatre_game;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Hero {
     private int x = 5, y = 378;
@@ -64,6 +67,7 @@ public class Hero {
         }
         collision();
         checkTrigger();
+        checkCollectables();
     }
 
     public void stop() {
@@ -128,6 +132,11 @@ public class Hero {
         if (downCollider.intersects(trigger) || upCollider.intersects(trigger)
                 || leftCollider.intersects(trigger) || rightCollider.intersects(trigger)) {
             if (Main.levels.size() > 1) {
+                try {
+                    Main.fullscreen = ImageIO.read(new File("image/level-passed.png"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 Main.levels.remove(0);
                 Main.currentLevel = Main.levels.getFirst();
                 x = Main.currentLevel.getStartX();
@@ -136,5 +145,15 @@ public class Hero {
 
         }
 
+    }
+
+    private void checkCollectables() {
+        for (Collectable collectable : Main.currentLevel.getCollectables()) {
+            Rectangle trigger = collectable.getTrigger();
+            if (collectable.isVisible() && (downCollider.intersects(trigger) || upCollider.intersects(trigger)
+                    || leftCollider.intersects(trigger) || rightCollider.intersects(trigger))) {
+                collectable.onCollect();
+            }
+        }
     }
 }

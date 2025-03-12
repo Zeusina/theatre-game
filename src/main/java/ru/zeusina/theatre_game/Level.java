@@ -14,13 +14,16 @@ public class Level {
     private int startX;
     private int startY;
 
-    public Level(Image background, Image hero, ArrayList<Platform> platforms, Rectangle checkpoint, int startX, int startY) {
+    private ArrayList<Collectable> collectables;
+
+    public Level(Image background, Image hero, ArrayList<Platform> platforms, ArrayList<Collectable> collectables, Rectangle checkpoint, int startX, int startY) {
         this.background = background;
         this.hero = hero;
         this.platforms = platforms;
         this.checkpoint = checkpoint;
         this.startX = startX;
         this.startY = startY;
+        this.collectables = collectables;
     }
 
     public Image getBackground() {
@@ -45,5 +48,9 @@ public class Level {
 
     public int getStartY() {
         return startY;
+    }
+
+    public ArrayList<Collectable> getCollectables() {
+        return collectables;
     }
 }
