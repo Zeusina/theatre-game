@@ -26,7 +26,7 @@ public class Icon implements Collectable {
     public void onCollect() {
         isVisible = false;
         try {
-            Main.fullscreen = ImageIO.read(new File("image/black.png"));
+            Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/black.png")), 10 * 1000);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

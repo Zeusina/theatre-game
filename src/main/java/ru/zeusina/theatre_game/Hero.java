@@ -51,7 +51,7 @@ public class Hero {
     public void update() {
         x += speedX;
         y += speedY;
-        downCollider.setBounds(x, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH, 10);
+        downCollider.setBounds(x + Const.CHARACTER_WIDTH / 3 + 20, y + Const.CHARACTER_HEIGHT - 10, Const.CHARACTER_WIDTH / 3, 10);
         upCollider.setBounds(x, y, Const.CHARACTER_WIDTH, 10);
         leftCollider.setBounds(x, y, 5, Const.CHARACTER_HEIGHT);
         rightCollider.setBounds(x + Const.CHARACTER_WIDTH - 5, y, 5, Const.CHARACTER_HEIGHT);
@@ -103,22 +103,22 @@ public class Hero {
                 onPlatform = true;
                 break;
             }
-            if (upCollider.intersects(platform)) {
-                y = platform.y + Const.PLATFORM_HEIGHT + 5;
-                speedY = 0;
-                jumpTicks = 0;
-                break;
-            }
-            if (leftCollider.intersects(platform)) {
-                speedX = 0;
-                x = platform.x + Const.PLATFORM_WIDTH + 1;
-                break;
-            }
-            if (rightCollider.intersects(platform)) {
-                speedX = 0;
-                x = platform.x - Const.CHARACTER_WIDTH;
-                break;
-            }
+//            if (upCollider.intersects(platform)) {
+//                y = platform.y + Const.PLATFORM_HEIGHT + 5;
+//                speedY = 0;
+//                jumpTicks = 0;
+//                break;
+//            }
+//            if (leftCollider.intersects(platform)) {
+//                speedX = 0;
+//                x = platform.x + Const.PLATFORM_WIDTH + 1;
+//                break;
+//            }
+//            if (rightCollider.intersects(platform)) {
+//                speedX = 0;
+//                x = platform.x - Const.CHARACTER_WIDTH;
+//                break;
+//            }
         }
 
         if (!onPlatform) {
@@ -133,14 +133,19 @@ public class Hero {
                 || leftCollider.intersects(trigger) || rightCollider.intersects(trigger)) {
             if (Main.levels.size() > 1) {
                 try {
-                    Main.fullscreen = ImageIO.read(new File("image/level-passed.png"));
+                    Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/level-passed.png")), 5 * 1000);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                Main.currentLevel.postLevel();
                 Main.levels.remove(0);
                 Main.currentLevel = Main.levels.getFirst();
+                Main.currentLevel.preLevel();
                 x = Main.currentLevel.getStartX();
                 y = Main.currentLevel.getStartY();
+            } else if (Main.levels.size() == 1) {
+                Main.levels.remove(0);
+                Main.currentLevel.postLevel();
             }
 
         }

@@ -16,7 +16,11 @@ public class Level {
 
     private ArrayList<Collectable> collectables;
 
-    public Level(Image background, Image hero, ArrayList<Platform> platforms, ArrayList<Collectable> collectables, Rectangle checkpoint, int startX, int startY) {
+    private Runnable preLevel;
+    private Runnable postLevel;
+
+    public Level(Image background, Image hero, ArrayList<Platform> platforms, ArrayList<Collectable> collectables,
+                 Rectangle checkpoint, int startX, int startY, Runnable preLevel, Runnable postLevel) {
         this.background = background;
         this.hero = hero;
         this.platforms = platforms;
@@ -24,6 +28,8 @@ public class Level {
         this.startX = startX;
         this.startY = startY;
         this.collectables = collectables;
+        this.preLevel = preLevel;
+        this.postLevel = postLevel;
     }
 
     public Image getBackground() {
@@ -52,5 +58,19 @@ public class Level {
 
     public ArrayList<Collectable> getCollectables() {
         return collectables;
+    }
+
+    public void preLevel() {
+        if (preLevel != null) {
+            Thread thread = new Thread(preLevel);
+            thread.start();
+        }
+    }
+
+    public void postLevel() {
+        if (postLevel != null) {
+            Thread thread = new Thread(postLevel);
+            thread.start();
+        }
     }
 }

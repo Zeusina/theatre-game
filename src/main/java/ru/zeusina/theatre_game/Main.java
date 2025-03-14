@@ -1,5 +1,8 @@
 package ru.zeusina.theatre_game;
 
+import ru.zeusina.theatre_game.scripts.PostImageScript;
+import ru.zeusina.theatre_game.scripts.level3ImageScript;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -14,72 +17,60 @@ public class Main {
     static ArrayList<Level> levels;
     static Level currentLevel;
 
-    static Image fullscreen = null;
+    public static Fullscreen fullscreen = null;
 
     static {
         levels = new ArrayList<>();
         try {
             Image hero = ImageIO.read(new File("image/hero.png"));
             ArrayList<Platform> level1Platforms = new ArrayList<>();
-            level1Platforms.add(new Platform(0, 613, 190, 22));
-            level1Platforms.add(new Platform(196, 718, 224, 38));
-            level1Platforms.add(new Platform(531, 960, 183, 26));
-            level1Platforms.add(new Platform(731, 593, 219, 25));
-            level1Platforms.add(new Platform(1042, 925, 153, 20));
-            level1Platforms.add(new Platform(1274, 774, 258, 28));
-            level1Platforms.add(new Platform(1551, 964, 256, 28));
-            level1Platforms.add(new Platform(1810, 767, 111, 27));
-            level1Platforms.add(new Platform(1244, 413, 224, 27));
+            level1Platforms.add(new Platform(3, 250, 190, 22));
+            level1Platforms.add(new Platform(4, 825, 190, 26));
+            level1Platforms.add(new Platform(215, 538, 208, 22));
+            level1Platforms.add(new Platform(678, 535, 193, 23));
+            level1Platforms.add(new Platform(670, 843, 195, 20));
+            level1Platforms.add(new Platform(542, 246, 192, 22));
+            level1Platforms.add(new Platform(992, 399, 194, 20));
+            level1Platforms.add(new Platform(1411, 270, 193, 21));
+            level1Platforms.add(new Platform(1639, 556, 194, 23));
+            level1Platforms.add(new Platform(1470, 937, 189, 27));
+            level1Platforms.add(new Platform(1731, 791, 190, 23));
+
 
             ArrayList<Collectable> level1Collectables = new ArrayList<>();
 
-            level1Collectables.add(new Star(305, 610));
-            level1Collectables.add(new Star(799, 477));
-            level1Collectables.add(new Star(1061, 804));
-            level1Collectables.add(new Star(1276, 310));
-            level1Collectables.add(new Star(620, 850));
-            level1Collectables.add(new Star(1364, 663));
-            level1Collectables.add(new Star(1820, 645));
-            level1Collectables.add(new Icon(ImageIO.read(new File("image/collectables/robot.png")), 1650, 840));
+            level1Collectables.add(new Star(264, 410));
+            level1Collectables.add(new Star(698, 730));
+            level1Collectables.add(new Star(1049, 289));
+            level1Collectables.add(new Star(1485, 810));
 
 
             levels.add(new Level(ImageIO.read(new File("image/levels/1.png")), hero, level1Platforms,
-                    level1Collectables, new Rectangle(1810, 571, 110, 195), 5, 378));
+                    level1Collectables, new Rectangle(1810, 571, 110, 195), 5, 378,
+                    new level3ImageScript(), null));
 
             ArrayList<Platform> level2Platforms = new ArrayList<>();
 
-            level2Platforms.add(new Platform(0, 1056, 191, 23));
-            level2Platforms.add(new Platform(204, 991, 195, 26));
-            level2Platforms.add(new Platform(417, 939, 193, 23));
-            level2Platforms.add(new Platform(625, 832, 194, 24));
-            level2Platforms.add(new Platform(841, 649, 192, 22));
-            level2Platforms.add(new Platform(1059, 648, 191, 24));
-            level2Platforms.add(new Platform(1277, 399, 193, 23));
-            level2Platforms.add(new Platform(1498, 344, 192, 22));
-            level2Platforms.add(new Platform(1730, 343, 190, 24));
+            level2Platforms.add(new Platform(0, 997, 192, 23));
+            level2Platforms.add(new Platform(191, 803, 191, 22));
+            level2Platforms.add(new Platform(382, 550, 194, 25));
+            level2Platforms.add(new Platform(582, 372, 192, 24));
+            level2Platforms.add(new Platform(848, 647, 139, 22));
+            level2Platforms.add(new Platform(1074, 439, 169, 22));
+            level2Platforms.add(new Platform(1268, 765, 382, 18));
+            level2Platforms.add(new Platform(1463, 296, 194, 22));
+            level2Platforms.add(new Platform(1726, 650, 195, 24));
 
             ArrayList<Collectable> level2Collectables = new ArrayList<>();
 
-            levels.add(new Level(ImageIO.read(new File("image/levels/2.jpg")), hero, level2Platforms,
-                    level2Collectables, new Rectangle(1855, 157, 65, 185), 8, 876));
+            level2Collectables.add(new Star(241, 688));
+            level2Collectables.add(new Star(881, 551));
+            level2Collectables.add(new Star(1368, 639));
 
-            ArrayList<Platform> level3Platforms = new ArrayList<>();
 
-            level3Platforms.add(new Platform(0, 342, 193, 24));
-            level3Platforms.add(new Platform(192, 651, 192, 24));
-            level3Platforms.add(new Platform(414, 819, 192, 26));
-            level3Platforms.add(new Platform(639, 653, 193, 24));
-            level3Platforms.add(new Platform(856, 819, 192, 25));
-            level3Platforms.add(new Platform(1061, 652, 193, 24));
-            level3Platforms.add(new Platform(1264, 545, 193, 22));
-            level3Platforms.add(new Platform(1506, 398, 190, 22));
-            level3Platforms.add(new Platform(1730, 295, 191, 22));
-
-            ArrayList<Collectable> level3Collectables = new ArrayList<>();
-
-            levels.add(new Level(ImageIO.read(new File("image/levels/3.jpg")), hero, level3Platforms,
-                    level3Collectables, new Rectangle(1857, 137, 64, 154), 11, 198));
-
+            levels.add(new Level(ImageIO.read(new File("image/levels/2.png")), hero, level2Platforms,
+                    level2Collectables, new Rectangle(1806, 494, 115, 157), 15, 710,
+                    null, new PostImageScript()));
 
             currentLevel = levels.getFirst();
         } catch (IOException e) {
@@ -97,6 +88,7 @@ public class Main {
 
         Thread thread = new Thread(screenPanel);
         thread.start();
+        currentLevel.preLevel();
 
         screen.addKeyListener(new KeyAdapter() {
             @Override
