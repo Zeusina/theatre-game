@@ -1,7 +1,11 @@
 package ru.zeusina.theatre_game;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,6 +25,7 @@ public class Hero {
     private int jumpTicks = 0;
 
     public void moveRight() {
+        Main.currentLevel.setHero(Main.currentLevel.getHeroRight());
         speedX = Const.SPEED;
     }
 
@@ -75,6 +80,7 @@ public class Hero {
     }
 
     public void moveLeft() {
+        Main.currentLevel.setHero(Main.currentLevel.getHeroLeft());
         speedX = -Const.SPEED;
     }
 

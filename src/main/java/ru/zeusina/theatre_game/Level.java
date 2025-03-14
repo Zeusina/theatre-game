@@ -1,11 +1,17 @@
 package ru.zeusina.theatre_game;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Level {
     private Image background;
     private Image hero;
+
+    private Image heroRight;
+    private Image heroLeft;
 
     private ArrayList<Platform> platforms;
 
@@ -19,10 +25,25 @@ public class Level {
     private Runnable preLevel;
     private Runnable postLevel;
 
+    public Image getHeroRight() {
+        return heroRight;
+    }
+
+    public Image getHeroLeft() {
+        return heroLeft;
+    }
+
     public Level(Image background, Image hero, ArrayList<Platform> platforms, ArrayList<Collectable> collectables,
                  Rectangle checkpoint, int startX, int startY, Runnable preLevel, Runnable postLevel) {
         this.background = background;
         this.hero = hero;
+        this.heroRight = hero;
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-hero.getWidth(null), 0);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        Image hero_flip = op.filter((BufferedImage) hero, null);
+        this.heroLeft = hero_flip;
+
         this.platforms = platforms;
         this.checkpoint = checkpoint;
         this.startX = startX;
@@ -72,5 +93,9 @@ public class Level {
             Thread thread = new Thread(postLevel);
             thread.start();
         }
+    }
+
+    public void setHero(Image hero) {
+        this.hero = hero;
     }
 }
