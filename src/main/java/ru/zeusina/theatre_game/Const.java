@@ -13,5 +13,5 @@ public class Const {
 
     static final int PLATFORM_WIDTH = 190, PLATFORM_HEIGHT = 25;
 
-    static final boolean DEBUG = true;
+    static final boolean DEBUG = false;
 }

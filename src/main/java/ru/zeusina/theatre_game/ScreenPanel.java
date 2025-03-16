@@ -46,9 +46,12 @@ public class ScreenPanel extends JPanel implements Runnable {
             }
         }
 
-        g.setColor(Color.ORANGE);
-        g.drawRect(Main.currentLevel.getCheckpoint().x, Main.currentLevel.getCheckpoint().y, Main.currentLevel.getCheckpoint().width, Main.currentLevel.getCheckpoint().height);
-        g.setColor(Color.BLACK);
+        if (Const.DEBUG) {
+            g.setColor(Color.ORANGE);
+            g.drawRect(Main.currentLevel.getCheckpoint().x, Main.currentLevel.getCheckpoint().y, Main.currentLevel.getCheckpoint().width, Main.currentLevel.getCheckpoint().height);
+            g.setColor(Color.BLACK);
+        }
+        
 
         if (Main.fullscreen != null) {
             g.drawImage(Main.fullscreen.getImage(), 0, 0, null);
