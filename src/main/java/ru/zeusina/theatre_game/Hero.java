@@ -138,11 +138,11 @@ public class Hero {
         if (downCollider.intersects(trigger) || upCollider.intersects(trigger)
                 || leftCollider.intersects(trigger) || rightCollider.intersects(trigger)) {
             if (Main.levels.size() > 1) {
-                try {
-                    Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/level-passed.png")), 5 * 1000);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/level-passed.png")), 5 * 1000);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
                 Main.currentLevel.postLevel();
                 Main.levels.remove(0);
                 Main.currentLevel = Main.levels.getFirst();

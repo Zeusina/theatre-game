@@ -46,7 +46,7 @@ public class Main {
 
 
             levels.add(new Level(ImageIO.read(new File("image/levels/1.png")), hero, level1Platforms,
-                    level1Collectables, new Rectangle(1810, 571, 110, 195), 5, 378,
+                    level1Collectables, new Rectangle(1920, 0, 50, 1080), 5, 378,
                     new level3ImageScript(), null));
 
             ArrayList<Platform> level2Platforms = new ArrayList<>();
@@ -66,6 +66,7 @@ public class Main {
             level2Collectables.add(new Star(241, 688));
             level2Collectables.add(new Star(881, 551));
             level2Collectables.add(new Star(1368, 639));
+            level2Collectables.add(new Star(1806, 494));
 
 
             levels.add(new Level(ImageIO.read(new File("image/levels/2.png")), hero, level2Platforms,

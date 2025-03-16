@@ -12,9 +12,11 @@ public class PostImageScript implements Script, Runnable {
     @Override
     public void run() {
         try {
-            Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/final_1.png")), 10 * 1000);
-            Thread.sleep(10 * 1000 + 40);
-            Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/final_2.png")), 30 * 1000);
+            Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/level-passed.png")), 5 * 1000);
+            Thread.sleep(5 * 1000);
+//            Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/final_1.png")), 10 * 1000);
+//            Thread.sleep(10 * 1000);
+//            Main.fullscreen = new Fullscreen(ImageIO.read(new File("image/fullscreen/final_2.png")), 30 * 1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
